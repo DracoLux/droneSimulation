@@ -39,7 +39,7 @@ void draw(){
     float orbitRadius= 300;//mouseX/2;
     
     float xpos= cos(radians(rotation))*orbitRadius;
-    float ypos= 100;//mouseY-(height/2);
+    float ypos= mouseY-(height/2);
     float zpos= sin(radians(rotation))*orbitRadius;
     
     camera(xpos, ypos, zpos, 0, 0, 0, 0, -1, 0);    
