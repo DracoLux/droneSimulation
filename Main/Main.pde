@@ -4,11 +4,15 @@ import java.util.List;
 void setup(){
   size(1000,800,P3D);
   
+  drones = new ArrayList();
+  
   // Initialize mover drone.
-  mover = new Drone();
-  mover.location = new Coordinate(150, 120, 100);
-  mover.destination = new Coordinate(500, 200, 120);  
-  mover.speed = calculateSpeed(mover.location, mover.destination);
+  for (int i = 0; i < 50; i++) {
+    drones.add(new Drone());
+    drones.get(i).location = new Coordinate(150 - i * 30, 120 + i * 10, 50 + i * 10);
+    drones.get(i).destination = new Coordinate(800 - i * 100, i * 100, 120 - 10 * i);  
+    drones.get(i).speed = calculateSpeed(drones.get(i).location, drones.get(i).destination);
+  }
   
 }
 
@@ -32,7 +36,7 @@ float distanceBetweenCoordinates(Coordinate start, Coordinate end) {
 int bouffer = 0;
 int bouffer2 = 0;
   
-Drone mover;
+List<Drone> drones;
 int size = 10000;
 boolean init = false;
 int moveX = 0;
@@ -64,11 +68,17 @@ void draw(){
     
     // Don't touch anything outside of this part of the code.
     // ---------
-    setDrone(mover.location.x, mover.location.y, mover.location.z);
-    mover.location.x += mover.speed.x;
-    mover.location.y += mover.speed.y;
-    mover.location.z += mover.speed.z;
-    mover.speed = calculateSpeed(mover.location, mover.destination);
+    Drone mover;
+    for (int i = 0; i < 50; i++) {
+      mover = drones.get(i);
+      setDrone(mover.location.x, mover.location.y, mover.location.z);
+      mover.location.x += mover.speed.x;
+      mover.location.y += mover.speed.y;
+      mover.location.z += mover.speed.z;
+      mover.speed = calculateSpeed(mover.location, mover.destination);
+    }
+    
+    
     // ---------
     // Don't touch anything below this!
 
