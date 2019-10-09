@@ -56,7 +56,7 @@ void draw(){
     for (int i = 0; i < droneNumber; i++) {
       mover = drones.get(i);
       setDrone(mover.location.x, mover.location.y, mover.location.z);
-      if (calc.distanceBetweenCoordinates(mover.location, mover.destination) < 10) {
+      if (calc.distanceBetweenCoordinates(mover.location, mover.destination) < 4) {
          mover.speed = new Coordinate(0, 0, 0);      
       }
       mover.location.x += mover.speed.x;
