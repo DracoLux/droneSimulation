@@ -1,6 +1,7 @@
 package network.client;
 
 import network.common.Command;
+import network.server.ServerCommand;
 
 public class ClientAdapter implements ClientListener {
 
@@ -13,7 +14,7 @@ public class ClientAdapter implements ClientListener {
 	@Override
 	public void commandReceived(Client client, Command cmd) {
 		// TODO Auto-generated method stub
-		if (cmd == Command.DISCONNECTED)
+		if (cmd == ServerCommand.DISCONNECTED)
           client.shutDown();
 	}
 
