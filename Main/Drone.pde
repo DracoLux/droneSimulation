@@ -18,4 +18,9 @@ class Drone {
     speed = calc.calculateSpeed(location, destination);
   }
   
+  @Override
+  public String toString(){
+    return droneId + " " + location;
+  }
+  
 }
