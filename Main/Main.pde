@@ -3,7 +3,6 @@ import network.client.Client;
 
 void setup(){
   size(1000,800,P3D);
-  connectToJavaApp();
   
   drones = new ArrayList();
   
@@ -31,11 +30,6 @@ List<Coordinate> coordinates;
 void readInput(){
   coordinates = new ArrayList();
   // Read coordinates from input
-}
-
-void connectToJavaApp(){
-  Client client = new Client("127.0.0.1", 5000);
-  client.start();
 }
 
 void draw(){
