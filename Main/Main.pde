@@ -7,35 +7,19 @@ void setup(){
   drones = new ArrayList();
   
   // Initialize mover drone.
-  for (int i = 0; i < 50; i++) {
+  for (int i = 0; i < droneNumber; i++) {
     drones.add(new Drone());
-    drones.get(i).location = new Coordinate(150 - i * 30, 120 + i * 10, 50 + i * 10);
+    drones.get(i).location = new Coordinate(150 - i * 40, 120 + i * 20, 50 + i * 10);
     drones.get(i).destination = new Coordinate(800 - i * 100, i * 100, 120 - 10 * i);  
-    drones.get(i).speed = calculateSpeed(drones.get(i).location, drones.get(i).destination);
+    drones.get(i).speed = calc.calculateSpeed(drones.get(i).location, drones.get(i).destination);
   }
   
 }
 
-// Calculate the speed from a start coordinate to an end coordinate. Hack solution returns a coordinate.
-Coordinate calculateSpeed(Coordinate start, Coordinate end) {
-  Coordinate speed = new Coordinate(0, 0, 0);
-  float distance = distanceBetweenCoordinates(start, end);
-  speed.x = (end.x - start.x)/(distance/3);
-  speed.y = (end.y - start.y)/(distance/3);
-  speed.z = (end.z - start.z)/(distance/3);
-  return speed;
-}
-
-// Calculates distance between two coordinates using standard mathematical function.
-float distanceBetweenCoordinates(Coordinate start, Coordinate end) {
-  float distance;
-  distance = (float) Math.sqrt(Math.pow((end.x - start.x), 2) + Math.pow((end.y - start.y), 2) + Math.pow((end.y - start.y), 2));
-  return distance;
-}
-
+int droneNumber = 3;
 int bouffer = 0;
 int bouffer2 = 0;
-  
+Calculator calc = new Calculator();
 List<Drone> drones;
 int size = 10000;
 boolean init = false;
@@ -75,7 +59,7 @@ void draw(){
       mover.location.x += mover.speed.x;
       mover.location.y += mover.speed.y;
       mover.location.z += mover.speed.z;
-      mover.speed = calculateSpeed(mover.location, mover.destination);
+      mover.speed = calc.calculateSpeed(mover.location, mover.destination);
     }
     
     
@@ -103,15 +87,15 @@ void setDrone(float x, float y, float z) {
 
 void keyPressed() {
   if (key == 'w' || key == 'W') {
-    bouffer += 20;
+    bouffer += 50;
   }
   if (key == 's' || key == 'S') {
-    bouffer -= 20;
+    bouffer -= 50;
   }
   if (key == 'a' || key == 'A') {
-    bouffer2 -= 20;
+    bouffer2 -= 50;
   }
   if (key == 'd' || key == 'D') {
-    bouffer2 += 20;
+    bouffer2 += 50;
   }
 }
