@@ -1,9 +1,38 @@
 import java.util.List;
-
+  
+    
 void setup(){
   size(1000,800,P3D);
+  
+  // Initialize mover drone.
+  mover = new Drone();
+  mover.location = new Coordinate(150, 120, 100);
+  mover.destination = new Coordinate(500, 200, 120);  
+  mover.speed = calculateSpeed(mover.location, mover.destination);
+  
 }
 
+// Calculate the speed from a start coordinate to an end coordinate. Hack solution returns a coordinate.
+Coordinate calculateSpeed(Coordinate start, Coordinate end) {
+  Coordinate speed = new Coordinate(0, 0, 0);
+  float distance = distanceBetweenCoordinates(start, end);
+  speed.x = (end.x - start.x)/(distance/3);
+  speed.y = (end.y - start.y)/(distance/3);
+  speed.z = (end.z - start.z)/(distance/3);
+  return speed;
+}
+
+// Calculates distance between two coordinates using standard mathematical function.
+float distanceBetweenCoordinates(Coordinate start, Coordinate end) {
+  float distance;
+  distance = (float) Math.sqrt(Math.pow((end.x - start.x), 2) + Math.pow((end.y - start.y), 2) + Math.pow((end.y - start.y), 2));
+  return distance;
+}
+
+int bouffer = 0;
+int bouffer2 = 0;
+  
+Drone mover;
 int size = 10000;
 boolean init = false;
 int moveX = 0;
@@ -30,26 +59,49 @@ void draw(){
     stroke(0,0,192);
     line(0,0,0,0,0,size);
     
-    stroke(200,200,200);
-    noFill();
-    translate(100,100,100);
-    box(25);
+    lights();
+    noStroke();
     
+    // Don't touch anything outside of this part of the code.
+    // ---------
+    setDrone(mover.location.x, mover.location.y, mover.location.z);
+    mover.location.x += mover.speed.x;
+    mover.location.y += mover.speed.y;
+    mover.location.z += mover.speed.z;
+    mover.speed = calculateSpeed(mover.location, mover.destination);
+    // ---------
+    // Don't touch anything below this!
+
     float rotation = (mouseX-(width/2))/2;
     float orbitRadius= 300;//mouseX/2;
     
-    float xpos= cos(radians(rotation))*orbitRadius;
-    float ypos= mouseY-(height/2);
-    float zpos= sin(radians(rotation))*orbitRadius;
+    float xpos= 1000 + /*cos(radians(rotation))*orbitRadius + */ bouffer;
+    float ypos= 1000; //mouseY-(height/2);
+    float zpos= 1000 + /* sin(radians(rotation))*orbitRadius + */ bouffer2;
     
     camera(xpos, ypos, zpos, 0, 0, 0, 0, -1, 0);    
   }
   init = true;
 }
 
-/*
-void mouseMoved(){
-  moveX = mouseX;
-  moveY = mouseY;
+void setDrone(float x, float y, float z) {
+  pushMatrix();
+  translate(x, y, z);
+  sphere(28);
+  popMatrix();
 }
-*/
+
+void keyPressed() {
+  if (key == 'w' || key == 'W') {
+    bouffer += 20;
+  }
+  if (key == 's' || key == 'S') {
+    bouffer -= 20;
+  }
+  if (key == 'a' || key == 'A') {
+    bouffer2 -= 20;
+  }
+  if (key == 'd' || key == 'D') {
+    bouffer2 += 20;
+  }
+}
