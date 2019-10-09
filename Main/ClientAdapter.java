@@ -13,7 +13,8 @@ public class ClientAdapter implements ClientListener {
 	@Override
 	public void commandReceived(Client client, Command cmd) {
 		// TODO Auto-generated method stub
-		
+		if (cmd == Command.DISCONNECTED)
+          client.shutDown();
 	}
 
 	@Override

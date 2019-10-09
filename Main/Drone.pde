@@ -9,7 +9,7 @@ class Drone {
   public Client client;
   
   public Drone(){
-    client = new Client("127.0.0.1", 5000);
+    client = new Client("127.0.0.1", 5000, new ClientAdapter());
     client.start();
   }
   
