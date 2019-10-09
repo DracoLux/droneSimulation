@@ -7,7 +7,7 @@ void setup(){
   drones = new ArrayList();
   
   // Initialize mover drone.
-  for (int i = 0; i < droneNumber; i++) {
+  for (int i = 0; i < drones.size(); i++) {
     drones.add(new Drone());
     drones.get(i).location = new Coordinate(150 - i * 40, 120 + i * 20, 50 + i * 10);
     drones.get(i).destination = new Coordinate(800 - i * 100, i * 100, 120 - 10 * i);  
@@ -16,7 +16,6 @@ void setup(){
   
 }
 
-final int droneNumber = 3;
 int bouffer = 0;
 int bouffer2 = 0;
 Calculator calc = new Calculator();
@@ -53,7 +52,7 @@ void draw(){
     // Don't touch anything outside of this part of the code.
     // ---------
     Drone mover;
-    for (int i = 0; i < droneNumber; i++) {
+    for (int i = 0; i < drones.size(); i++) {
       mover = drones.get(i);
       setDrone(mover.location.x, mover.location.y, mover.location.z);
       if (calc.distanceBetweenCoordinates(mover.location, mover.destination) < 4) {
