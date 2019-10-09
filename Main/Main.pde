@@ -8,19 +8,19 @@ void setup(){
   
   // Initialize mover drone.
   for (int i = 0; i < droneNumber; i++) {
-    drones.add(new Drone());
-    drones.get(i).location = new Coordinate(150 - i * 40, 120 + i * 20, 50 + i * 10);
-    drones.get(i).destination = new Coordinate(800 - i * 100, i * 100, 120 - 10 * i);  
+    drones.add(new Drone(i));
+    drones.get(i).location = new Coordinate(0,0,0);
+    drones.get(i).destination = drones.get(i).location;  
     drones.get(i).speed = calc.calculateSpeed(drones.get(i).location, drones.get(i).destination);
   }
   
 }
 
-final int droneNumber = 3;
+final int droneNumber = 10;
 int bouffer = 0;
 int bouffer2 = 0;
 Calculator calc = new Calculator();
-List<Drone> drones;
+public List<Drone> drones;
 int size = 10000;
 boolean init = false;
 int moveX = 0;
@@ -30,6 +30,15 @@ List<Coordinate> coordinates;
 void readInput(){
   coordinates = new ArrayList();
   // Read coordinates from input
+}
+
+Drone getDroneByClient(Client client){
+  for (Drone d : drones){
+    if (d.client == client) {
+      return d;
+    }
+  }
+  return null;
 }
 
 void draw(){
