@@ -1,4 +1,5 @@
 import network.client.Client;
+import java.awt.Color;
 
 class Drone {
   public Coordinate location;
@@ -7,10 +8,14 @@ class Drone {
   public int droneId;
   public Calculator calc = new Calculator();
   public Client client;
+  public Color lightColor;
+  public int lightVolume;
   
   public Drone(int droneId){
     this.droneId = droneId;
-    client = new Client("127.0.0.1", 5000, new ClientAdapter());
+    this.lightColor = Color.WHITE;
+    this.lightVolume = 100;
+    this.client = new Client("127.0.0.1", 5000, new ClientAdapter());
     client.start();
   }
   

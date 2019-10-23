@@ -64,7 +64,8 @@ void draw(){
     Drone mover;
     for (int i = 0; i < droneNumber; i++) {
       mover = drones.get(i);
-      setDrone(mover.location.x, mover.location.y, mover.location.z);
+      drawDrone(mover);
+      
       if (calc.distanceBetweenCoordinates(mover.location, mover.destination) < 4) {
          mover.speed = new Coordinate(0, 0, 0);      
       }
@@ -90,9 +91,10 @@ void draw(){
   init = true;
 }
 
-void setDrone(float x, float y, float z) {
+void drawDrone(Drone drone) {
   pushMatrix();
-  translate(x, y, z);
+  translate(drone.location.x, drone.location.y, drone.location.z);
+  stroke(drone.lightColor.getRed(),drone.lightColor.getGreen(),drone.lightColor.getBlue(),((float) drone.lightVolume/100)*255);
   sphere(28);
   popMatrix();
 }
