@@ -62,7 +62,7 @@ void draw(){
     // Don't touch anything outside of this part of the code.
     // ---------
     Drone mover;
-    for (int i = 0; i < droneNumber; i++) {
+    for (int i = 0; i < drones.size(); i++) {
       mover = drones.get(i);
       drawDrone(mover);
       
