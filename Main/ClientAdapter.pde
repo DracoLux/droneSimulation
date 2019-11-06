@@ -23,6 +23,7 @@ public class ClientAdapter implements ClientListener {
     else if (cmd instanceof LightChange){
       LightChange light = (LightChange) cmd;
       drone.lightColor = light.lightColor;
+      drone.tempColor = light.lightColor;
       drone.lightVolume = light.lightVolume;
     }
     else if(cmd == ServerCommand.HOVER){
