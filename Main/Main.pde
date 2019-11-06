@@ -14,6 +14,12 @@ void setup() {
     drones.get(i).destination = drones.get(i).location;
     drones.get(i).speed = calc.calculateSpeed(drones.get(i).location, drones.get(i).destination);
   }
+  
+  try {
+    Thread.sleep(1000);
+  } catch (InterruptedException e) {
+    e.printStackTrace();
+  }
 }
 
 
@@ -22,7 +28,7 @@ static final float droneRadius = 28; // Each sphere radius in the processing env
 static final float droneBuffer = droneRadius * 3; // Each sphere radius in the processing environment.
 static final int collisionBufferTime = 300; // The buffer time for escaping before returning to standard procedure.
 final int droneNumber = 32; // How many drones to connect.
-static final int speed = 8; // The flying speed of the drones.
+static final int speed = 4; // The flying speed of the drones.
 Calculator calc = new Calculator(); // Calculator for some mathematical functions.
 public List<Drone> drones; // All drones collected.
 Random random = new Random();
