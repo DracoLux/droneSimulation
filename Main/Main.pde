@@ -1,25 +1,26 @@
 import java.util.List;
-  
-    
+import network.client.Client;
+
 void setup(){
   size(1000,800,P3D);
   
   drones = new ArrayList();
   
   // Initialize mover drone.
-  for (int i = 0; i < drones.size(); i++) {
-    drones.add(new Drone());
-    drones.get(i).location = new Coordinate(150 - i * 40, 120 + i * 20, 50 + i * 10);
-    drones.get(i).destination = new Coordinate(800 - i * 100, i * 100, 120 - 10 * i);  
+  for (int i = 0; i < droneNumber; i++) {
+    drones.add(new Drone(i));
+    drones.get(i).location = new Coordinate(0,0,0);
+    drones.get(i).destination = drones.get(i).location;  
     drones.get(i).speed = calc.calculateSpeed(drones.get(i).location, drones.get(i).destination);
   }
   
 }
 
+final int droneNumber = 10;
 int bouffer = 0;
 int bouffer2 = 0;
 Calculator calc = new Calculator();
-List<Drone> drones;
+public List<Drone> drones;
 int size = 10000;
 boolean init = false;
 int moveX = 0;
@@ -29,6 +30,15 @@ List<Coordinate> coordinates;
 void readInput(){
   coordinates = new ArrayList();
   // Read coordinates from input
+}
+
+Drone getDroneByClient(Client client){
+  for (Drone d : drones){
+    if (d.client == client) {
+      return d;
+    }
+  }
+  return null;
 }
 
 void draw(){
@@ -54,7 +64,8 @@ void draw(){
     Drone mover;
     for (int i = 0; i < drones.size(); i++) {
       mover = drones.get(i);
-      setDrone(mover.location.x, mover.location.y, mover.location.z);
+      drawDrone(mover);
+      
       if (calc.distanceBetweenCoordinates(mover.location, mover.destination) < 4) {
          mover.speed = new Coordinate(0, 0, 0);      
       }
@@ -80,9 +91,10 @@ void draw(){
   init = true;
 }
 
-void setDrone(float x, float y, float z) {
+void drawDrone(Drone drone) {
   pushMatrix();
-  translate(x, y, z);
+  translate(drone.location.x, drone.location.y, drone.location.z);
+  stroke(drone.lightColor.getRed(),drone.lightColor.getGreen(),drone.lightColor.getBlue(),((float) drone.lightVolume/100)*255);
   sphere(28);
   popMatrix();
 }
