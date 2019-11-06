@@ -10,9 +10,9 @@ class Calculator {
     Coordinate calculateSpeed(Coordinate start, Coordinate end) {
     Coordinate speed = new Coordinate(0, 0, 0);
     float distance = distanceBetweenCoordinates(start, end);
-    speed.x = (end.x - start.x)/(distance/3);
-    speed.y = (end.y - start.y)/(distance/3);
-    speed.z = (end.z - start.z)/(distance/3);
+    speed.x = (end.x - start.x)/(distance/Main.speed);
+    speed.y = (end.y - start.y)/(distance/Main.speed);
+    speed.z = (end.z - start.z)/(distance/Main.speed);
     return speed;
   }
 }
