@@ -16,7 +16,7 @@ void setup(){
   
 }
 
-final int droneNumber = 10;
+final int droneNumber = 32;
 int bouffer = 0;
 int bouffer2 = 0;
 Calculator calc = new Calculator();
@@ -26,6 +26,8 @@ boolean init = false;
 int moveX = 0;
 int moveY = 0;
 List<Coordinate> coordinates;
+
+static final int speed = 8;
 
 void readInput(){
   coordinates = new ArrayList();
